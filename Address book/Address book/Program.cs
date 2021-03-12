@@ -9,27 +9,44 @@ namespace Address_book
         static void Main(string[] args)
         {            
             Console.WriteLine("Welcome to Addresh book using console Apllicaation by Amit Rana");
-            setContactDetails();
+            AddressBook addressBook = new AddressBook();
+            Console.WriteLine("Menu : \n1.Add Contact \n2.exit---press 0");
+            int options = Convert.ToInt32(Console.ReadLine());
+            while (options != 0)
+            {
+               switch (options)
+               {
+                case 1:
+                    Contact contact = new Contact();
+                    setContactDetails(contact);
+                    addressBook.AddContact(contact);
+                    break;
+                    default:
+                        Console.WriteLine("sorry wrong input");
+                        break;
+                }
+            } 
+            Console.WriteLine(addressBook.ContactList.Count);
         }
-        public static void setContactDetails()
+        public static void setContactDetails(Contact contact)
         {
-            Contact obj = new Contact();
+            
                 Console.WriteLine("Enter the First Name");
-                obj.FirstName = Console.ReadLine();
+                contact.FirstName = Console.ReadLine();
                 Console.WriteLine("Enter the Last Name");
-                obj.LastName = Console.ReadLine();
+                contact.LastName = Console.ReadLine();
                 Console.WriteLine("Enter the Address");
-                obj.Address = Console.ReadLine();
+                contact.Address = Console.ReadLine();
                 Console.WriteLine("Enter the City Name");
-                obj.City = Console.ReadLine();
+                contact.City = Console.ReadLine();
                 Console.WriteLine("Enter the State Name");
-                obj.State = Console.ReadLine();
+                contact.State = Console.ReadLine();
                 Console.WriteLine("Enter the zip code");
-                obj.Zip = Convert.ToInt32(Console.ReadLine());
+                contact.Zip = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter the Phone Number");
-                obj.PhoneNumber = long.Parse(Console.ReadLine());
+                contact.PhoneNumber = long.Parse(Console.ReadLine());
                 Console.WriteLine("Enter the email address");
-                obj.Email = Console.ReadLine();
+                contact.Email = Console.ReadLine();
             
         }
         
