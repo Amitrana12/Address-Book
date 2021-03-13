@@ -8,13 +8,13 @@ namespace Address_book
     {
         static void Main(string[] args)
         {            
-            Console.WriteLine("Welcome to Addresh book using console Apllicaation by Amit Rana");
+            Console.WriteLine("===Welcome to Addresh book using console Apllicaation by Amit Rana==");
             AddressBook addressBook = new AddressBook();
 
             int options;
             do
             {
-                Console.WriteLine("Menu : \n1.Add Contact \n\n2.Edit Contact \n0.exit---press 0");
+                Console.WriteLine("\tChose options : \n1.Add Contact \n2.Edit Contact \n3.Delete user  \nPress ' 0 '(zero) for exit from  appliction");
                 options = Convert.ToInt32(Console.ReadLine());
 
                 switch (options)
@@ -24,9 +24,7 @@ namespace Address_book
                         setContactDetails(contact);
                         addressBook.AddContact(contact);
                         break;
-                    default:
-                        Console.WriteLine("sorry wrong input");
-                        break;
+                    
                     case 2:
                         Console.WriteLine("Enter the Phone Number of Contact you wish to Edit");
                         long phoneNumber = long.Parse(Console.ReadLine());
@@ -43,6 +41,24 @@ namespace Address_book
                             addressBook.ContactList[index] = contact2;
                             Console.WriteLine("Contact Updated Successfully");
                         }
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the First Name of Contact you wish to delete");
+                        string fname = Console.ReadLine();
+                        int idx = addressBook.FindByFirstName(fname);
+                        if (idx == -1)
+                        {
+                            Console.WriteLine("No Contact Exists with Following First Name");
+                            continue;
+                        }
+                        else
+                        {
+                            addressBook.DeleteContact(idx);
+                            Console.WriteLine("Contact Deleted Successfully \n");
+                        }
+                        break;
+                     default:
+                        Console.WriteLine("sorry wrong input \n");
                         break;
 
                 }
