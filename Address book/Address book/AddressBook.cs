@@ -15,7 +15,10 @@ namespace Address_book
         {
             this.ContactList.Add(contactObj);
         }
-        
+        public int FindByPhoneNum(long phoneNumber)
+        {
+            return this.ContactList.FindIndex(contact => contact.PhoneNumber.Equals(phoneNumber));
+        }
 
     }
 }

@@ -10,22 +10,43 @@ namespace Address_book
         {            
             Console.WriteLine("Welcome to Addresh book using console Apllicaation by Amit Rana");
             AddressBook addressBook = new AddressBook();
-            Console.WriteLine("Menu : \n1.Add Contact \n2.exit---press 0");
-            int options = Convert.ToInt32(Console.ReadLine());
-            while (options != 0)
+
+            int options;
+            do
             {
-               switch (options)
-               {
-                case 1:
-                    Contact contact = new Contact();
-                    setContactDetails(contact);
-                    addressBook.AddContact(contact);
-                    break;
+                Console.WriteLine("Menu : \n1.Add Contact \n\n2.Edit Contact \n0.exit---press 0");
+                options = Convert.ToInt32(Console.ReadLine());
+
+                switch (options)
+                {
+                    case 1:
+                        Contact contact = new Contact();
+                        setContactDetails(contact);
+                        addressBook.AddContact(contact);
+                        break;
                     default:
                         Console.WriteLine("sorry wrong input");
                         break;
+                    case 2:
+                        Console.WriteLine("Enter the Phone Number of Contact you wish to Edit");
+                        long phoneNumber = long.Parse(Console.ReadLine());
+                        int index = addressBook.FindByPhoneNum(phoneNumber);
+                        if (index == -1)
+                        {
+                            Console.WriteLine("No Contact Exists With Following Phone Number");
+                            continue;
+                        }
+                        else
+                        {
+                            Contact contact2 = new Contact();
+                            setContactDetails(contact2);
+                            addressBook.ContactList[index] = contact2;
+                            Console.WriteLine("Contact Updated Successfully");
+                        }
+                        break;
+
                 }
-            } 
+            } while (options != 0);
             Console.WriteLine(addressBook.ContactList.Count);
         }
         public static void setContactDetails(Contact contact)
