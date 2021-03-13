@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Address_book
 {
@@ -6,64 +8,39 @@ namespace Address_book
     public static
     class Program
     {
+        public static Dictionary<string, AddressBook> MapAddressBook = new Dictionary<string, AddressBook>();
+
         static void Main(string[] args)
         {            
-            Console.WriteLine("===Welcome to Addresh book using console Apllicaation by Amit Rana==");
-            AddressBook addressBook = new AddressBook();
-
-            int options;
+            Console.WriteLine("===Welcome to Addresh book using console Apllicaation by Amit Rana===");
+     
+            int optisn;
+            string name;
             do
             {
-                Console.WriteLine("\tChose options : \n1.Add Contact \n2.Edit Contact \n3.Delete user  \nPress ' 0 '(zero) for exit from  appliction");
-                options = Convert.ToInt32(Console.ReadLine());
-
-                switch (options)
+                Console.WriteLine("\nOptions : \n 1.Add New Address Book \n 2.Work On Existing Address Book \n 3.Exit");
+                optisn = Convert.ToInt32(Console.ReadLine());
+                switch (optisn)
                 {
                     case 1:
-                        Contact contact = new Contact();
-                        setContactDetails(contact);
-                        addressBook.AddContact(contact);
+                        Console.WriteLine("Enter the Name of Address Book");
+                        name = Console.ReadLine();
+                        MapAddressBook.Add(name, new AddressBook());
                         break;
-                    
                     case 2:
-                        Console.WriteLine("Enter the Phone Number of Contact you wish to Edit");
-                        long phoneNumber = long.Parse(Console.ReadLine());
-                        int index = addressBook.FindByPhoneNum(phoneNumber);
-                        if (index == -1)
-                        {
-                            Console.WriteLine("No Contact Exists With Following Phone Number");
-                            continue;
-                        }
-                        else
-                        {
-                            Contact contact2 = new Contact();
-                            setContactDetails(contact2);
-                            addressBook.ContactList[index] = contact2;
-                            Console.WriteLine("Contact Updated Successfully");
-                        }
+                        Console.WriteLine("Enter the Name of Address Book in which you want to Work On");
+                        name = Console.ReadLine();
+                        AddressBook addressBook = MapAddressBook[name];
+                        FillAddressBook(addressBook);
                         break;
-                    case 3:
-                        Console.WriteLine("Enter the First Name of Contact you wish to delete");
-                        string fname = Console.ReadLine();
-                        int idx = addressBook.FindByFirstName(fname);
-                        if (idx == -1)
-                        {
-                            Console.WriteLine("No Contact Exists with Following First Name");
-                            continue;
-                        }
-                        else
-                        {
-                            addressBook.DeleteContact(idx);
-                            Console.WriteLine("Contact Deleted Successfully \n");
-                        }
+                    default:
+                        Console.WriteLine("sorry worng input");
                         break;
-                     default:
-                        Console.WriteLine("sorry wrong input \n");
-                        break;
-
                 }
-            } while (options != 0);
-            Console.WriteLine(addressBook.ContactList.Count);
+            } while (optisn != 3);
+
+
+
         }
         public static void setContactDetails(Contact contact)
         {
@@ -86,7 +63,61 @@ namespace Address_book
                 contact.Email = Console.ReadLine();
             
         }
-        
-    }
+        public static void FillAddressBook(AddressBook addressBook)
+        {
+            int options;
+            do
+            {
+                Console.WriteLine("\tChose options : \n1.Add Contact \n2.Edit Contact \n3.Delete user  \nPress ' 0 '(zero) for exit from  appliction");
+                options = Convert.ToInt32(Console.ReadLine());
+
+                switch (options)
+                {
+                    case 1:
+                        Contact contact = new Contact();
+                        setContactDetails(contact);
+                        addressBook.AddContact(contact);
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Enter the Phone Number of Contact you wish to Edit");
+                        long phoneNumber = long.Parse(Console.ReadLine());
+                        int index = addressBook.FindByPhoneNum(phoneNumber);
+                        if (index == -1)
+                        {
+                            Console.WriteLine("Sorry!!!! No Contact Exists With Following Phone Number");
+                            continue;
+                        }
+                        else
+                        {
+                            Contact contact2 = new Contact();
+                            setContactDetails(contact2);
+                            addressBook.ContactList[index] = contact2;
+                            Console.WriteLine("Thankyou!!!!  Contact Updated Successfully");
+                        }
+                        break;
+                    case 3:
+                        string fname = Console.ReadLine();
+                        int idx = addressBook.FindByFirstName(fname);
+                        if (idx == -1)
+                        {
+                            Console.WriteLine("Sorry!!! No Contact Exists with Following First Name");
+                            continue;
+                        }
+                        else
+                        {
+                            addressBook.DeleteContact(idx);
+                            Console.WriteLine("Thankyou!! Contact Deleted Successfully");
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("sorry wrong input \n");
+                        break;
+
+                }
+            } while (options != 0);
+        }
+
+        }
 
 }
