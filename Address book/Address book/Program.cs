@@ -4,8 +4,6 @@ using System.Text;
 
 namespace Address_book
 {
-
-    public static
     class Program
     {
         public static Dictionary<string, AddressBook> MapAddressBook = new Dictionary<string, AddressBook>();
