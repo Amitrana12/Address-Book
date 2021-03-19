@@ -11,10 +11,10 @@ namespace Address_book
         {
             this.ContactList = new List<Contact>();
         }
-        public void AddContact(Contact contactObj)
+       /* public void AddContact(Contact contactObj)
         {
             this.ContactList.Add(contactObj);
-        }
+        }*/
         public int FindByPhoneNum(long phoneNumber)
         {
             return this.ContactList.FindIndex(contact => contact.PhoneNumber.Equals(phoneNumber));
@@ -28,6 +28,14 @@ namespace Address_book
         public void DeleteContact(int index)
         {
             this.ContactList.RemoveAt(index);
+        }
+        //for checking dupicate data alredy presnt or not 
+        public void AddContact(Contact contactObj)
+        {
+            if (this.ContactList.Find(e => e.Equals(contactObj)) != null)
+                Console.WriteLine("=====oppsss sorry !!! The Contact Already Exists! Please Try Again with Diffrent Contact.=====");
+            else
+                this.ContactList.Add(contactObj);
         }
 
     }

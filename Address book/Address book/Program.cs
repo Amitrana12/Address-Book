@@ -31,6 +31,9 @@ namespace Address_book
                         AddressBook addressBook = MapAddressBook[name];
                         FillAddressBook(addressBook);
                         break;
+                    case 3:
+                        Console.WriteLine("====Thankyou!!! Have A Nice Day(*_*)===== ");
+                        break;
                     default:
                         Console.WriteLine("sorry worng input");
                         break;
@@ -71,6 +74,9 @@ namespace Address_book
 
                 switch (options)
                 {
+                    case 0:
+                        Console.WriteLine("====Thankyou!!! Have A Nice Day(*_*)===== ");
+                        break;
                     case 1:
                         Contact contact = new Contact();
                         setContactDetails(contact);
@@ -109,7 +115,7 @@ namespace Address_book
                         }
                         break;
                     default:
-                        Console.WriteLine("sorry wrong input \n");
+                        Console.WriteLine("sorry wrong input(*.*) \n");
                         break;
 
                 }
